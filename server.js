@@ -31,7 +31,14 @@ app.get("/", (req, res) => {
 
 // Set up an interval that broadcasts system info every 250ms
 var sysInfoCounter = 0;
-setInterval(function broadcastSysInfo() {
+
+setInterval(function () {
+  sysInfoChannel.send({
+    data: `Time passed since first connection: ${sysInfoCounter++} s ...`,
+  });
+}, 1000);
+
+function broadcastSysInfo() {
   sysInfoChannel.send({
     id: sysInfoCounter++,
     data: {
@@ -39,7 +46,10 @@ setInterval(function broadcastSysInfo() {
       loadavg: os.loadavg(),
     },
   });
-}, 2000);
+  setTimeout(broadcastSysInfo, Math.random() * 5000);
+}
+
+broadcastSysInfo();
 
 app.listen(PORT, () => {
   console.log(`listening on port: ${PORT}`);
