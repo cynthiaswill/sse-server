@@ -8,8 +8,6 @@ app.use(cors());
 
 const PORT = 8000;
 
-// Set up a new channel. Most of these options have sane defaults,
-// feel free to look at lib/sse-channel.js for all available options
 var sysInfoChannel = new SseChannel({
   retryTimeout: 250,
   historySize: 300,
@@ -29,7 +27,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// Set up an interval that broadcasts system info every 250ms
 var sysInfoCounter = 0;
 
 // setInterval(function () {
