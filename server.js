@@ -14,6 +14,7 @@ var sysInfoChannel = new SseChannel({
   retryTimeout: 250,
   historySize: 300,
   pingInterval: 15000,
+  cors: { origins: ["*"] },
   jsonEncode: true,
 });
 
