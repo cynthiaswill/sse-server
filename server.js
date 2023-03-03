@@ -17,12 +17,15 @@ var sysInfoChannel = new SseChannel({
 });
 
 app.get("/", (req, res) => {
-  console.log("client connected");
+  console.log("** client connected ** \n");
   res.setHeader("Content-Type", "application/json");
   sysInfoChannel.addClient(req, res);
 
   res.on("close", () => {
-    console.log("Client closed connection");
+    console.log(
+      "-- Client dropped connection... Saving disconnection TimeStap to DB... \n"
+    );
+    // record disconnections to DB
     res.end();
   });
 });
