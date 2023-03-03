@@ -32,11 +32,11 @@ app.get("/", (req, res) => {
 // Set up an interval that broadcasts system info every 250ms
 var sysInfoCounter = 0;
 
-setInterval(function () {
-  sysInfoChannel.send({
-    data: `Time passed since first connection: ${sysInfoCounter++} s ...`,
-  });
-}, 1000);
+// setInterval(function () {
+//   sysInfoChannel.send({
+//     data: `Time passed since first connection: ${sysInfoCounter++} s ...`,
+//   });
+// }, 1000);
 
 function broadcastSysInfo() {
   sysInfoChannel.send({
