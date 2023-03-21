@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import SseChannel from "sse-channel";
+import { events_data } from "./events.js";
 import os from "os";
 
 const app = express();
@@ -39,13 +40,17 @@ var sysInfoCounter = 0;
 // }, 1000);
 
 function broadcastSysInfo() {
-  sysInfoChannel.send({
-    id: sysInfoCounter++,
-    data: {
-      freemem: os.freemem(),
-      loadavg: os.loadavg(),
-    },
-  });
+  sysInfoChannel.send(
+    { data: events_data[Math.floor(Math.random() * events_data.length)] }
+
+    // {
+    //   id: sysInfoCounter++,
+    //   data: {
+    //     freemem: os.freemem(),
+    //     loadavg: os.loadavg(),
+    //   },
+    // }
+  );
   setTimeout(broadcastSysInfo, Math.random() * 5000);
 }
 
